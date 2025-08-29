@@ -30,13 +30,13 @@ class ClienteService {
   ) async {
     final conn = await DatabaseConfig.connect();
     var result = await conn.query(
-      'INSERT INTO cliente (nome, dataNacimento, numero ,email) VALUES (?, ?)', //ver oque significa cada linha
+      'INSERT INTO cliente (nome, dataNacimento, numero ,email) VALUES (?, ?, ?, ?)',
       [name, dateOfBirh, phoneNumber, email],
     );
     await conn.close();
 
     return Cliente(
-      id: result.insertId, //,ver isso aqui
+      id: result.insertId!,
       name: name,
       dateOfBirth: dateOfBirh,
       phoneNumber: phoneNumber,
@@ -65,9 +65,7 @@ class ClienteService {
 
   Future<void> delete(int id) async {
     final conn = await DatabaseConfig.connect();
-    await conn.query('DELETE FROM cliente WHERE id=?', [
-      id,
-    ]); //add aqui os outros campos
+    await conn.query('DELETE FROM cliente WHERE id=?', [id]);
     await conn.close();
   }
 }
