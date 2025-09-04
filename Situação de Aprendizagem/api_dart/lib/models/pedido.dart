@@ -4,13 +4,13 @@ class Pedido {
   final int id;
   final int dateOrder;
   final int clientId;
-  final int livroId;
+  final int bookId;
 
   Pedido({
     required this.id,
     required this.dateOrder,
     required this.clientId,
-    required this.livroId,
+    required this.bookId,
   });
 
   factory Pedido.fromMap(Map<String, dynamic> map) {
@@ -18,7 +18,7 @@ class Pedido {
       id: map['id'],
       dateOrder: map['dateOrder'],
       clientId: map['clientId'],
-      livroId: map['livroId'],
+      bookId: map['bookId'],
     );
   }
 
@@ -27,7 +27,7 @@ class Pedido {
       'id': id,
       'dateOrder': dateOrder,
       'clientId': clientId,
-      'livroId': livroId,
+      'bookId': bookId,
       
     };
   }
