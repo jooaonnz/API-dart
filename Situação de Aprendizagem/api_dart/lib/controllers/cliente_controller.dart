@@ -24,7 +24,7 @@ class ClienteController {
       final data = jsonDecode(body);
       final cliente = await _service.create(
         data['nome'],
-        data['dataNascimento'],
+        data['dataNascimente'],
         data['numero'],
         data['email'],
       );

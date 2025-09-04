@@ -5,8 +5,8 @@ class DatabaseConfig {
     final settings = ConnectionSettings(
       host: 'localhost',
       port: 3306,
-      user: 'root', // seu usuário
-      password: 'root', // sua senha
+      user: 'eskelsen', // seu usuário
+      password: 'password', // sua senha
       db: 'biblioteca', // banco de dados
     );
 

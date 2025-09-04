@@ -5,7 +5,7 @@ import '../models/cliente.dart';
 class ClienteService {
   Future<List<Cliente>> getAll() async {
     final conn = await DatabaseConfig.connect();
-    final results = await conn.query('SELECT * FROM clientes');
+    final results = await conn.query('SELECT * FROM cliente');
     await conn.close();
 
     return results
@@ -24,13 +24,13 @@ class ClienteService {
   //portugues e ingles no banco de dados na hora do insert verificar os ??
   Future<Cliente> create(
     String name,
-    int dateOfBirh,
-    int phoneNumber,
+    String dateOfBirh,
+    String phoneNumber,
     String email,
   ) async {
     final conn = await DatabaseConfig.connect();
     var result = await conn.query(
-      'INSERT INTO cliente (nome, dataNacimento, numero ,email) VALUES (?, ?, ?, ?)',
+      'INSERT INTO cliente (nome, dataNascimente, numero ,email) VALUES (?, ?, ?, ?)',
       [name, dateOfBirh, phoneNumber, email],
     );
     await conn.close();
@@ -45,7 +45,7 @@ class ClienteService {
   }
 
   //fazer regra de negoocia dos demais
-
+  //string nos int
   Future<void> update(
     int id,
     String name,

@@ -3,8 +3,8 @@ import 'dart:io';
 class Cliente {
   final int id;
   final String name;
-  final int dateOfBirth;
-  final int phoneNumber;
+  final String dateOfBirth;
+  final String phoneNumber;
   final String email;
 
   Cliente({
@@ -28,7 +28,7 @@ class Cliente {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'nome': name,
+      'name': name,
       'dateOfBirth': dateOfBirth,
       'phoneNumber': phoneNumber,
       'email': email,
