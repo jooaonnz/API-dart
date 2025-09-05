@@ -4,8 +4,8 @@ import '../models/cliente.dart';
 
 class ClienteService {
   Future<List<Cliente>> getAll() async {
-    final conn = await DatabaseConfig.connect();
-    final results = await conn.query('SELECT * FROM clientes');
+    final conn = await Connection.connect();
+    final results = await conn.query('SELECT * FROM cliente');
     await conn.close();
 
     return results
@@ -28,7 +28,7 @@ class ClienteService {
     int phoneNumber,
     String email,
   ) async {
-    final conn = await DatabaseConfig.connect();
+    final conn = await Connection.connect();
     var result = await conn.query(
       'INSERT INTO cliente (nome, dataNacimento, numero ,email) VALUES (?, ?, ?, ?)',
       [name, dateOfBirh, phoneNumber, email],
@@ -53,7 +53,7 @@ class ClienteService {
     int phoneNumber,
     String email,
   ) async {
-    final conn = await DatabaseConfig.connect();
+    final conn = await Connection.connect();
     await conn.query('UPDATE cliente SET nome=?, email=? WHERE id=?', [
       //add aqui os outros campos
       name,
@@ -64,7 +64,7 @@ class ClienteService {
   }
 
   Future<void> delete(int id) async {
-    final conn = await DatabaseConfig.connect();
+    final conn = await Connection.connect();
     await conn.query('DELETE FROM cliente WHERE id=?', [id]);
     await conn.close();
   }

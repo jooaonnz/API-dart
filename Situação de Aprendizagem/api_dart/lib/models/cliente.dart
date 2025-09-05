@@ -18,9 +18,9 @@ class Cliente {
   factory Cliente.fromMap(Map<String, dynamic> map) {
     return Cliente(
       id: map['id'],
-      name: map['name'],
-      dateOfBirth: map['dateOfBirh'],
-      phoneNumber: map['phoneNumber'],
+      name: map['nome'],
+      dateOfBirth: map['dataNacimente'],
+      phoneNumber: map['numero'],
       email: map['email'],
     );
   }
@@ -29,8 +29,8 @@ class Cliente {
     return {
       'id': id,
       'nome': name,
-      'dateOfBirth': dateOfBirth,
-      'phoneNumber': phoneNumber,
+      'dataNascimente': dateOfBirth,
+      'numero': phoneNumber,
       'email': email,
     };
   }

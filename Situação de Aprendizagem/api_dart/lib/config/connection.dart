@@ -1,10 +1,10 @@
 import 'package:mysql1/mysql1.dart';
 
-class DatabaseConfig {
+class Connection {
   static Future<MySqlConnection> connect() async {
     final settings = ConnectionSettings(
       host: 'localhost',
-      port: 3306,
+      port: 3306, //3896
       user: 'root', // seu usuário
       password: 'root', // sua senha
       db: 'biblioteca', // banco de dados
@@ -12,8 +12,4 @@ class DatabaseConfig {
 
     return await MySqlConnection.connect(settings);
   }
-}
-
-void main() {
-  print('teste');
 }
