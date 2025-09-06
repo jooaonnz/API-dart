@@ -3,8 +3,8 @@ import 'dart:io';
 class Cliente {
   final int id;
   final String name;
-  final int dateOfBirth;
-  final int phoneNumber;
+  final DateTime dateOfBirth;
+  final String phoneNumber;
   final String email;
 
   Cliente({
@@ -16,10 +16,12 @@ class Cliente {
   });
 
   factory Cliente.fromMap(Map<String, dynamic> map) {
+    print('teste');
+    print(map['dataNascimento']);
     return Cliente(
       id: map['id'],
       name: map['nome'],
-      dateOfBirth: map['dataNacimente'],
+      dateOfBirth: DateTime.parse(map['dataNascimento']),
       phoneNumber: map['numero'],
       email: map['email'],
     );
@@ -29,7 +31,7 @@ class Cliente {
     return {
       'id': id,
       'nome': name,
-      'dataNascimente': dateOfBirth,
+      'dataNascimento': dateOfBirth.toIso8601String().split('T')[0],
       'numero': phoneNumber,
       'email': email,
     };

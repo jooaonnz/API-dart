@@ -12,9 +12,9 @@ class ClienteService {
         .map(
           (r) => Cliente(
             id: r['id'],
-            name: r['name'],
-            dateOfBirth: r['dateOfBirth'],
-            phoneNumber: r['phoneNumber'],
+            name: r['nome'],
+            dateOfBirth: r['dataNascimento'],
+            phoneNumber: r['numero'],
             email: r['email'],
           ),
         )
@@ -24,28 +24,38 @@ class ClienteService {
   //portugues e ingles no banco de dados na hora do insert verificar os ??
   Future<Cliente> create(
     String name,
-    int dateOfBirh,
-    int phoneNumber,
+    DateTime dateOfBirth,
+    String phoneNumber,
     String email,
   ) async {
+    print('Entrou no método create');
+    print('Parâmetros recebidos:');
+    print([name, dateOfBirth, phoneNumber, email]);
+
     final conn = await Connection.connect();
+
+    String dateStr = dateOfBirth.toIso8601String().split('T')[0];
+
     var result = await conn.query(
-      'INSERT INTO cliente (nome, dataNacimento, numero ,email) VALUES (?, ?, ?, ?)',
-      [name, dateOfBirh, phoneNumber, email],
+      'INSERT INTO cliente (nome, dataNascimento, numero ,email) VALUES (?, ?, ?, ?)',
+      [name, dateStr, phoneNumber, email],
     );
     await conn.close();
+
+    print('Valores enviados para o insert:');
+    print([name, dateStr, phoneNumber, email]);
 
     return Cliente(
       id: result.insertId!,
       name: name,
-      dateOfBirth: dateOfBirh,
+      dateOfBirth: dateOfBirth,
       phoneNumber: phoneNumber,
       email: email,
     );
   }
 
   //fazer regra de negoocia dos demais
-
+  //string nos int
   Future<void> update(
     int id,
     String name,

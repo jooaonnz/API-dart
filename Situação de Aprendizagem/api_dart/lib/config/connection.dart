@@ -8,6 +8,7 @@ class Connection {
       user: 'root', // seu usuário
       password: 'root', // sua senha
       db: 'biblioteca', // banco de dados
+      characterSet: CharacterSet.UTF8MB4, //novo
     );
 
     return await MySqlConnection.connect(settings);

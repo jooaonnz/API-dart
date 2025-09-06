@@ -11,9 +11,9 @@ class ClienteController {
 
     // GET - Listar todos
     router.get('/cliente', (Request req) async {
-      final clientes = await _service.getAll();
+      final cliente = await _service.getAll();
       return Response.ok(
-        jsonEncode(clientes.map((c) => c.toMap()).toList()),
+        jsonEncode(cliente.map((c) => c.toMap()).toList()),
         headers: {'Content-Type': 'application/json'},
       );
     });
@@ -24,7 +24,7 @@ class ClienteController {
       final data = jsonDecode(body);
       final cliente = await _service.create(
         data['nome'],
-        data['dataNascimento'],
+        DateTime.parse(data['dataNascimento']),
         data['numero'],
         data['email'],
       );
