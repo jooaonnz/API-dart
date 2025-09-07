@@ -12,20 +12,19 @@ class PedidoService {
         .map(
           (r) => Pedido(
             id: r['id'],
-            dateOrder: r['dateOrder'],
-            clientId: r['clientId'],
-            bookId: r['bookId'],
+            dateOrder: r['dataPedido'],
+            clientId: r['clienteId'],
           ),
         )
         .toList();
   }
 
   //portugues e ingles no banco de dados na hora do insert verificar os ??
-  Future<Pedido> create(int dateOrder, int clientId, int bookId) async {
+  Future<Pedido> create(int dateOrder, int clientId) async {
     final conn = await Connection.connect();
     var result = await conn.query(
-      'INSERT INTO pedido (dataPedido, clienteId, livroId) VALUES (?, ?, ?)',
-      [dateOrder, clientId, bookId],
+      'INSERT INTO pedido (dataPedido, clienteId) VALUES (?, ?)',
+      [dateOrder, clientId],
     );
     await conn.close();
 
@@ -33,19 +32,17 @@ class PedidoService {
       id: result.insertId!,
       dateOrder: dateOrder,
       clientId: clientId,
-      bookId: bookId,
     );
   }
 
   //update arrumar
   //fazer regra de negoocia dos demais
   //string nos int
-  Future<void> update(int id, int dateOrder, int clientId, int bookId) async {
+  Future<void> update(int id, int dateOrder, int clientId) async {
     final conn = await Connection.connect();
     await conn.query('UPDATE pedido SET nome=?, email=? WHERE id=?', [
       //add aqui os outros campos
       clientId,
-      bookId,
       id,
     ]);
     await conn.close();

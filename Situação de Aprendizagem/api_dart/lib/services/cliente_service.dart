@@ -28,30 +28,36 @@ class ClienteService {
     String phoneNumber,
     String email,
   ) async {
-    print('Entrou no método create');
-    print('Parâmetros recebidos:');
-    print([name, dateOfBirth, phoneNumber, email]);
-
     final conn = await Connection.connect();
 
-    String dateStr = dateOfBirth.toIso8601String().split('T')[0];
+    try {
+      print([name, dateOfBirth, phoneNumber, email]);
 
-    var result = await conn.query(
-      'INSERT INTO cliente (nome, dataNascimento, numero ,email) VALUES (?, ?, ?, ?)',
-      [name, dateStr, phoneNumber, email],
-    );
-    await conn.close();
+      String dateStr = dateOfBirth.toIso8601String().split('T')[0];
 
-    print('Valores enviados para o insert:');
-    print([name, dateStr, phoneNumber, email]);
+      var result = await conn.query(
+        'INSERT INTO cliente (nome, dataNascimento, numero ,email) VALUES (?, ?, ?, ?)',
+        [name, dateStr, phoneNumber, email],
+      );
 
-    return Cliente(
-      id: result.insertId!,
-      name: name,
-      dateOfBirth: dateOfBirth,
-      phoneNumber: phoneNumber,
-      email: email,
-    );
+      print('Valores enviados para o insert:');
+      print([name, dateStr, phoneNumber, email]);
+
+      return Cliente(
+        id: result.insertId!,
+        name: name,
+        dateOfBirth: dateOfBirth,
+        phoneNumber: phoneNumber,
+        email: email,
+      );
+    } catch (e, stackTrace) {
+      // Captura qualquer erro (conexão, query, etc)
+      print(' Erro ao criar cliente: $e');
+      print(' StackTrace: $stackTrace');
+      rethrow;
+    } finally {
+      await conn.close();
+    }
   }
 
   //fazer regra de negoocia dos demais

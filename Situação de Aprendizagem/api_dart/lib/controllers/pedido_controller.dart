@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:api_dart/models/Pedido.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-import '../services/Pedido_service.dart';
+import '../services/pedido_service.dart';
 
 class PedidoController {
   final _service = PedidoService();
@@ -24,9 +24,8 @@ class PedidoController {
       final body = await req.readAsString();
       final data = jsonDecode(body);
       final pedido = await _service.create(
-        data['dateOrder'],
-        data['clientId'],
-        data['bookId'],
+        data['dataPedido'],
+        data['clienteId'],
       );
 
       return Response.ok(

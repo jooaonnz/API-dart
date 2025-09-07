@@ -11,11 +11,17 @@ class ClienteController {
 
     // GET - Listar todos
     router.get('/cliente', (Request req) async {
-      final cliente = await _service.getAll();
-      return Response.ok(
-        jsonEncode(cliente.map((c) => c.toMap()).toList()),
-        headers: {'Content-Type': 'application/json'},
-      );
+      try {
+        final cliente = await _service.getAll();
+        return Response.ok(
+          jsonEncode(cliente.map((c) => c.toMap()).toList()),
+          headers: {'Content-Type': 'application/json'},
+        );
+      } catch (e) {
+        return Response.internalServerError(
+          body: 'Erro ao buscar clientes: $e',
+        );
+      }
     });
 
     // POST - Criar
