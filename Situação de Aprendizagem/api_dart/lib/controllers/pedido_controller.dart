@@ -10,7 +10,7 @@ class PedidoController {
   Router get router {
     final router = Router();
 
-    // GET - Listar todos
+    // GET - Listar todos atualizado
     router.get('/pedido', (Request req) async {
       final pedido = await _service.getAll();
       return Response.ok(

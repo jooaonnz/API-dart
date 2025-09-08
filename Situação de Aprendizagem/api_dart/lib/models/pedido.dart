@@ -16,6 +16,8 @@ class Pedido {
   }
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'dataPedido': dateOrder, 'clienteId': clientId};
+    return {'id': id,
+     'dataPedido': dateOrder, 
+     'clienteId': clientId};
   }
 }
